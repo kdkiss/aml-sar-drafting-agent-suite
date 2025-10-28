@@ -1,4 +1,4 @@
-# API Documentation
+# Tools and Configuration Documentation
 
 ## BaselineComparatorTool
 
