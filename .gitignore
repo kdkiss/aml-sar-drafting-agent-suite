@@ -70,12 +70,13 @@ storage/
 .crewai/
 memory/
 
-# Output files (SAR reports contain sensitive data)
-output/
+# Output files - allow example outputs for marketplace demonstration
+# output/
 *.md
 !README.md
 !docs/*.md
 !LICENSE.md
+!output/*.md
 
 # Marketplace development files (should not be committed)
 docs/MARKETPLACE_TODO.md
