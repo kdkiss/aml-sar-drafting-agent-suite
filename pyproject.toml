@@ -1,0 +1,45 @@
+[project]
+name = "aml_sar_drafting_agent_suite"
+version = "0.1.0"
+description = "AI-powered CrewAI suite for analyzing suspicious financial activity and drafting regulatory-compliant Suspicious Activity Reports (SARs)"
+authors = [{ name = "Kolja Kiss", email = "kolja.kiss@example.com" }]
+license = { text = "MIT" }
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "crewai[tools]==1.2.1"
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=7.0.0",
+    "pytest-mock>=3.10.0"
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-v"
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+python_classes = ["Test*"]
+
+[project.scripts]
+aml_sar_drafting_agent_suite = "aml_sar_drafting_agent_suite.main:run"
+run_crew = "aml_sar_drafting_agent_suite.main:run"
+train = "aml_sar_drafting_agent_suite.main:train"
+replay = "aml_sar_drafting_agent_suite.main:replay"
+test = "aml_sar_drafting_agent_suite.main:test"
+run_with_trigger = "aml_sar_drafting_agent_suite.main:run_with_trigger"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+test = [
+    "pytest>=8.4.2",
+    "pytest-mock>=3.15.1",
+]
+
+[tool.crewai]
+type = "crew"

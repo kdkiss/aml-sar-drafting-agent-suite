@@ -1,0 +1,106 @@
+analyze_transactions:
+  description: >
+    Review the provided transaction data, customer profile, and alert details to identify
+    activity that meets SAR criteria. Evaluate patterns, velocity, structuring indicators,
+    and typologies. Determine whether the activity indicates attempts to evade reporting
+    (not merely proximity to the CTR threshold). Use precise dates, amounts, channels,
+    and transaction frequency to evidence the pattern.
+
+    Tool usage:
+    - First, calculate current metrics from the alert window based on {transaction_data}:
+      * For wire transfers: wire_volume_monthly, transaction_count_monthly, avg_transaction_size
+      * For cash deposits: cash_deposits_monthly, deposit_count_monthly
+      * For checks: check_deposits_monthly, check_count_monthly, returned_checks_monthly
+    - Then call behavioral_baseline_comparator with exactly these parameters:
+        transaction_data: {transaction_data}
+        current_metrics: {{"wire_transfers_monthly": 152150, "international_transfers_monthly": 13}}
+      IMPORTANT: current_metrics must ONLY contain metric names and NUMERIC values - no account numbers or text.
+    - Interpret the resulting JSON and integrate key deviations into analysis WITHOUT raw JSON.
+
+    Transaction Data: {transaction_data}
+    Customer Profile: {customer_profile}
+    Alert Details: {alert_details}
+
+  expected_output: >
+    A structured transaction analysis report (500–800 words) that:
+    - Quantifies the activity (counts, sums, time windows)
+    - Details patterns chronologically with specific dated examples
+    - Identifies typologies or red flags supported by facts
+    - Names key actors where known
+    - Explains why the behavior meets SAR criteria
+    - Integrates baseline comparator findings (only as interpreted facts — no raw JSON)
+    
+  agent: transaction_analyst
+  markdown: true
+  output_file: output/{account_number}_transaction_analysis.md
+
+
+research_regulations:
+  description: >
+    Identify the applicable regulatory obligations governing SAR filing for this activity.
+    Include relevant BSA/AML rules, FinCEN SAR narrative expectations, recent advisories,
+    and typology guidance directly related to the flagged behavior. Specify which rules
+    determine what must appear in the narrative and what triggers a SAR.
+    
+    Activity Type: {activity_type}
+
+  expected_output: >
+    A regulatory compliance brief (400–600 words) that:
+    - Lists the specific BSA/AML rules implicated
+    - Summarizes FinCEN SAR filing expectations for this case type
+    - Identifies applicable typology or red-flag guidance
+    - Notes any recent regulatory advisories or enforcement themes
+    - States the required narrative elements for this SAR type
+
+  agent: regulatory_researcher
+  context:
+    - analyze_transactions
+  markdown: true
+  output_file: output/{account_number}_regulations.md
+
+draft_sar_narrative:
+  description: >
+    Draft a submission-ready SAR narrative using the five essential elements: who, what,
+    when, where, and why. Introduce the subject and expected baseline, then describe the
+    suspicious activity chronologically with exact transaction examples. Explain factually
+    why the behavior is suspicious and link to relevant typologies without asserting guilt.
+    Maintain a neutral, concise, examiner-oriented tone.
+
+  expected_output: >
+    A complete SAR narrative (800–1200 words) with clear labeled sections that:
+    - Identifies the subject and institutional relationship
+    - Describes the activity chronologically with dated examples
+    - States why the facts meet SAR criteria (not conclusions of crime)
+    - References typologies or red flags supported by evidence
+    - Retains neutral, factual, regulatory-appropriate tone
+
+  agent: narrative_drafter
+  context:
+    - analyze_transactions
+    - research_regulations
+  markdown: true
+  output_file: output/{account_number}_sar_narrative.md
+
+review_sar_quality:
+  description: >
+    Conduct a full QA review of the draft narrative for completeness, accuracy, tone,
+    and regulatory alignment. Confirm that dates, amounts, logic, and typology references
+    are accurate; that the five elements are explicitly present; and that the narrative is
+    examiner-usable. Identify any required corrections or approve if submission-ready.
+
+  expected_output: >
+    A QA report (300–500 words) that:
+    - States pass/fail and justification
+    - Lists exact deficiencies if revision is required
+    - Provides explicit fixes or enhancement instructions
+    - Or approves as submission-ready with minor notes
+    - Ends with a clear filing readiness recommendation
+
+  agent: quality_reviewer
+  context:
+    - analyze_transactions
+    - research_regulations
+    - draft_sar_narrative
+  markdown: true
+  create_directory: true
+  output_file: output/{account_number}_sar_quality_review.md

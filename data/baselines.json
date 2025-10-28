@@ -1,0 +1,89 @@
+{
+  "789-456-1234": {
+    "historical_window_days": 365,
+    "customer_baseline": {
+      "cash_deposits_monthly": 6200,
+      "wire_volume_monthly": 12800
+    },
+    "peer_baseline": {
+      "cash_deposits_monthly": 5000,
+      "wire_volume_monthly": 9000
+    }
+  },
+  "456-789-0123": {
+    "historical_window_days": 730,
+    "customer_baseline": {
+      "wire_volume_monthly": 2800000,
+      "transaction_count_monthly": 8,
+      "avg_transaction_size": 350000
+    },
+    "peer_baseline": {
+      "wire_volume_monthly": 2200000,
+      "transaction_count_monthly": 6,
+      "avg_transaction_size": 400000
+    }
+  },
+  "321-654-9870": {
+    "historical_window_days": 90,
+    "customer_baseline": {
+      "wire_volume_monthly": 0,
+      "ach_volume_monthly": 0,
+      "international_transfers_monthly": 0
+    },
+    "peer_baseline": {
+      "wire_volume_monthly": 15000,
+      "ach_volume_monthly": 8000,
+      "international_transfers_monthly": 1
+    }
+  },
+  "987-123-4567": {
+    "historical_window_days": 180,
+    "customer_baseline": {
+      "check_deposits_monthly": 7500,
+      "check_count_monthly": 4,
+      "returned_checks_monthly": 0
+    },
+    "peer_baseline": {
+      "check_deposits_monthly": 8500,
+      "check_count_monthly": 5,
+      "returned_checks_monthly": 0.2
+    }
+  },
+  "654-321-0987": {
+    "historical_window_days": 10950,
+    "customer_baseline": {
+      "wire_transfers_monthly": 0,
+      "international_activity_monthly": 0,
+      "account_depletion_rate": 0.02
+    },
+    "peer_baseline": {
+      "wire_transfers_monthly": 0.5,
+      "international_activity_monthly": 0.1,
+      "account_depletion_rate": 0.05
+    }
+  },
+  "Rodriguez Import Export LLC": {
+    "historical_window_days": 365,
+    "customer_baseline": {
+      "cash_deposits_monthly": 6200,
+      "wire_volume_monthly": 12800
+    },
+    "peer_baseline": {
+      "cash_deposits_monthly": 5000,
+      "wire_volume_monthly": 9000
+    }
+  },
+  "Global Trade Solutions Inc": {
+    "historical_window_days": 730,
+    "customer_baseline": {
+      "wire_volume_monthly": 2800000,
+      "transaction_count_monthly": 8,
+      "avg_transaction_size": 350000
+    },
+    "peer_baseline": {
+      "wire_volume_monthly": 2200000,
+      "transaction_count_monthly": 6,
+      "avg_transaction_size": 400000
+    }
+  }
+}
