@@ -1,15 +1,34 @@
-# AML SAR Drafting Agent Suite
+# AML SAR Drafting Agent Suite - CrewAI Crew
 
 [![Python Version](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://python.org)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![CrewAI](https://img.shields.io/badge/CrewAI-1.2.1-orange.svg)](https://crewai.com)
+[![CrewAI](https://img.shields.io/badge/CrewAI-0.140.0%2B-orange.svg)](https://crewai.com)
 [![Tests](https://img.shields.io/badge/tests-passing-brightgreen.svg)](#testing)
 
-An intelligent CrewAI-powered system for analyzing suspicious financial activity and drafting comprehensive Suspicious Activity Reports (SARs) that meet FinCEN regulatory requirements.
+## 🚀 Overview
 
-## Overview
+An intelligent CrewAI-powered system that automates the analysis of suspicious financial activity and drafts comprehensive Suspicious Activity Reports (SARs) that meet FinCEN regulatory requirements. This crew transforms complex transaction data into professional, submission-ready regulatory reports.
 
-The AML SAR Drafting Agent Suite automates and enhances the suspicious activity reporting process by coordinating four specialized AI agents that work together to analyze transactions, research regulations, draft narratives, and ensure quality compliance.
+This crew enables financial institutions to streamline their AML compliance processes by leveraging a team of specialized AI agents that collaborate to analyze transactions, research regulations, draft narratives, and ensure quality compliance.
+
+## ✨ Key Features
+
+- **Multi-Agent Analysis**: Four specialized agents (Transaction Analyst, Regulatory Researcher, Narrative Drafter, Quality Reviewer) work together to ensure comprehensive SAR preparation
+- **Regulatory Compliance**: Built-in knowledge of Bank Secrecy Act, FinCEN requirements, and current AML/CFT regulations with automatic compliance verification
+- **Multiple SAR Types**: Supports structuring, trade-based money laundering, layering, check kiting, elder fraud, and other suspicious activity patterns
+- **Baseline Comparison**: Custom tool compares transaction metrics against historical and peer baselines to identify anomalies
+- **Enterprise Integration**: Trigger-based system for seamless integration with existing AML monitoring platforms
+- **Quality Assurance**: Comprehensive review process ensures accuracy, completeness, and regulatory compliance before submission
+
+## 🔍 Use Cases
+
+This crew is ideal for:
+
+- **Financial Institutions** needing to automate SAR drafting and reduce compliance workload
+- **AML Compliance Teams** looking to standardize and improve the quality of suspicious activity reporting
+- **RegTech Companies** building comprehensive AML monitoring and reporting solutions
+- **Credit Unions and Community Banks** requiring cost-effective compliance automation
+- **Fintech Companies** needing robust AML reporting capabilities for regulatory compliance
 
 ## Agents
 
@@ -79,25 +98,65 @@ The Quality Reviewer conducts a comprehensive QA review to ensure the SAR meets 
 
 **Output:** Quality assurance report with final approval or required corrections (saved to `sar_quality_review.md`).
 
-## Installation
+## 🛠️ Requirements
 
-```bash
-# Install CrewAI
-pip install crewai
+- CrewAI version: >=0.140.0
+- Python: 3.10-3.14
+- API Keys needed:
+  - **OpenAI API**: Required for LLM functionality - obtain from [OpenAI Platform](https://platform.openai.com/api-keys)
+  - **Brave Search API**: Optional for regulatory research - obtain from [Brave Search API](https://brave.com/search/api/)
+- Additional dependencies: All dependencies managed via UV package manager (see pyproject.toml)
 
-# Install additional dependencies
-pip install 'crewai[tools]'
+## 📈 Example Output
+
+The crew generates comprehensive SAR documentation including transaction analysis, regulatory compliance brief, narrative draft, and quality review. Each output is saved as a separate markdown file for easy review and submission.
+
+```
+Transaction Analysis Report:
+- Suspicious Pattern: Structuring (CTR Avoidance)
+- Risk Score: High (8.5/10)
+- Key Indicators: Multiple cash deposits just under $10,000 threshold
+- Timeline: 7 transactions over 10 days totaling $67,300
+
+SAR Narrative (Excerpt):
+"Between October 1-10, 2024, customer John Smith conducted seven cash deposits 
+ranging from $9,200 to $9,800, totaling $67,300. This pattern appears designed 
+to avoid Currency Transaction Report requirements..."
+
+Quality Review: ✅ APPROVED FOR SUBMISSION
+- Regulatory compliance: Complete
+- Narrative clarity: Excellent
+- Supporting documentation: Adequate
 ```
 
-## Documentation
+## 🚀 Quick Start
 
-Comprehensive documentation is available in the `docs/` folder:
+```bash
+# Install dependencies
+uv sync
 
-- **[API Documentation](docs/API.md)** - Tool usage and crew configuration
-- **[Example Scenarios](docs/EXAMPLES.md)** - Detailed SAR type examples and usage
-- **[Environment Setup](docs/ENV_SETUP.md)** - Configuration and API key setup
-- **[Trigger Usage](docs/TRIGGERS_USAGE.md)** - Enterprise integration guide
-- **[Development Notes](docs/MARKETPLACE_TODO.md)** - Development checklist and status
+# Configure environment
+cp .env.example .env
+# Add your API keys to .env
+
+# Run with example data
+crewai run
+
+# Or use specific SAR type
+INPUT_FILE=data/structuring_example.json crewai run
+```
+
+## 📚 Resources and References
+
+- [FinCEN SAR Filing Requirements](https://www.fincen.gov/resources/filing-information)
+- [Bank Secrecy Act Compliance](https://www.occ.gov/topics/supervision-and-examination/bsa/index-bsa.html)
+- [CrewAI Documentation](https://docs.crewai.com/)
+- [Project Documentation](docs/README.md)
+- [Author: Kolja Kiss](https://github.com/kolja-kiss)
+
+## 🤝 Contributing
+
+Contributions are welcome! Please ensure all changes maintain regulatory compliance standards and include appropriate test coverage. See our comprehensive test suite for examples.
 
 ## Usage
 
@@ -239,18 +298,10 @@ pytest tests/ --cov=src/aml_sar_drafting_agent_suite
 - **Test Coverage**: 95%+ code coverage
 - **Memory Usage**: <500MB typical operation
 
-## Disclaimer
+## 📝 License
 
-This crew is a tool to assist in SAR drafting and does not constitute legal or compliance advice. Financial institutions remain responsible for their SAR filing obligations and should consult with legal and compliance professionals as needed.
+MIT License - see [LICENSE](LICENSE) file for details.
 
-## License
+---
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Support
-
-For issues, questions, or contributions:
-- Create an issue in the repository
-- Review the [troubleshooting section](#troubleshooting) above
-- Check the comprehensive [documentation](docs/) folder
-- Explore the [example scenarios](docs/EXAMPLES.md) for different SAR types
+**Disclaimer**: This tool assists in SAR preparation but does not replace human judgment and expertise. All SARs must be reviewed by qualified compliance personnel before filing. Users are responsible for ensuring compliance with all applicable laws and regulations.
